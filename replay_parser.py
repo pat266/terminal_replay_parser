@@ -57,7 +57,7 @@ def process_line(i, original, flip=False, turns=None, frames=True, sort=True):
     if sort:
         result = sort_data(result)
 
-    return result + '\n'
+    return result + '\n\n'
 
 
 def sort_data(original):
