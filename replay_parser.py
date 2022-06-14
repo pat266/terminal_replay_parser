@@ -32,6 +32,13 @@ def flip_vert(point):
     return [27 - point[0], 27 - point[1]]
 
 
+def process_file(file, flipped_file, flip=False, turns=None, frames=True):
+    for i, line in enumerate(file):
+        line = line.strip()
+        if line != '':
+            flipped_file.write(process_line(i, line, flip, turns, frames))
+        
+
 def process_line(i, original, flip=False, turns=None, frames=True, sort=True):
     data = json.loads(original)
 
@@ -108,11 +115,6 @@ def flip_line(i, original):
         data['endStats']['winner'] = 1 if data['endStats']['winner'] == 2 else 2
 
     return json.dumps(data, separators=(',', ':'))
-
-
-def process_file(file, flipped_file, flip=False, turns=None, frames=True):
-    for i, line in enumerate(file):
-        flipped_file.write(process_line(i, line, flip, turns, frames))
 
 
 def make_suffix(args):
